@@ -1,7 +1,7 @@
 import json, logging, os
 from datetime import datetime
 import boto3
-from .collectors.cloudwatch_collector import CloudWatchCollector
+from collectors.cloudwatch_collector import CloudWatchCollector
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -36,5 +36,12 @@ def lambda_handler(event, context):
             )
             logger.info(f"Sent to ANALYZE: {inc.title}")
 
-    return {'statusCode': 200,
-            'body': json.dumps({'incidents_found': len(incidents)})}
+    return {
+    'statusCode': 200,
+    'headers': {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST,GET,OPTIONS'
+    },
+    'body': json.dumps({'incidents_found': len(incidents)})
+}

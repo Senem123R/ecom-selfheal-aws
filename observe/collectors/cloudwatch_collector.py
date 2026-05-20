@@ -1,6 +1,8 @@
 import boto3, logging, uuid
 from datetime import datetime, timedelta
-from ..models.incident import Incident, Severity
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models.incident import Incident, Severity
 
 logger = logging.getLogger()
 
